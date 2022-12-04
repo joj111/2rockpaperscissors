@@ -1,75 +1,75 @@
-for (i = 1; i < 10; i++){
-    let result;
-    let win = "You win!";
-    let lost = "You lost!";
-    let tie = "You tied!";
-    let playerSelection = playerChoice();
-    let computerSelection = getComputerChoice();
+//score
+let playerScore = 0;
+let computerScore = 0;
 
-    function getComputerChoice() {
-        let computerNo = Math.floor(Math.random() * 3) + 1;
+//score
 
-        if (computerNo === 1) {
-            return("rock");
-        } else if (computerNo === 2) {
-            return("paper");
-        } else {
-            return("sissors");
-        };
-    }
-    console.log(getComputerChoice());
+function getComputerChoice() {
+    let choice = Math.floor(Math.random() * 3);
 
-    function playerChoice() {
-        let playerAns = prompt("Pick Rock Paper or Sissors").toLowerCase();
-        console.log(playerAns);
-        return(playerAns);
-    }
-
-    // console.log(playerChoice());
-
-    function playRound(playerSelection, computerSelection) {
-        if (playerSelection === "rock") {
-            if (computerSelection === "paper") {
-                return("lost");
-            } else if (computerSelection === "rock") {
-                return("tie");
-            } else {
-                return("win");
-            }
-        } else if (playerSelection === "paper") {
-            if (computerSelection === "paper") {
-                return("tie");
-            } else if (computerSelection === "rock") {
-                return("win");
-            } else {
-                return("lost");
-            }
-        } else if (playerSelection === "sissors") {
-            if (computerSelection === "paper") {
-                return("win");
-            } else if (computerSelection === "rock") {
-                return("lost");
-            } else {
-                return("tie");
-            }
-        } else {
-            return("error");
-        }
-    }
-    console.log(playRound(playerSelection, computerSelection))
+    if (choice === 0) {
+        console.log("ROCK")
+        return("ROCK");
+    } else if (choice === 1) {
+        console.log("PAPER")
+        return("PAPER");
+    } else {
+        console.log("SCISSORS")
+        return("SCISSORS");
+    };
 }
 
-    // for (i = 1; i < 5; i++) {
-    //     getComputerChoice();
-    //     playerChoice();
-    //     console.log(playRound(playerSelection, computerSelection));
-    // }
+function playerChoice() {
+    const answer = prompt("PICK ROCK PAPER OR SCISSORS").toUpperCase();
+    console.log(answer);
+    return(answer);
+}
+ 
+function round(player, computer) {
+    if (player === computer) {
+        console.log("TIE")
+        return("TIE");
+    } else if (player === "ROCK" && computer === "PAPER") {
+        console.log("LOSS")
+        computerScore++;
+        return("LOSS");
+    } else if (player === "ROCK" && computer === "SCISSORS") {
+        console.log("WIN")
+        playerScore++;
+        return("WIN");
+    } else if (player === "PAPER" && computer === "ROCK") {
+        console.log("LOSS")
+        computerScore++;
+        return("LOSS");
+    } else if (player === "PAPER" && computer === "SCISSORS") {
+        console.log("WIN")
+        playerScore++;
+        return("WIN");
+    } else if (player === "SCISSORS" && computer === "PAPER") {
+        console.log("LOSS")
+        computerScore++;
+        return("LOSS");
+    } else if (player === "SCISSORS" && computer === "ROCK") {
+        console.log("WIN")
+        playerScore++;
+        return("WIN");
+    }
+}
 
+function game() {
+    playerScore = 0;
+    computerScore = 0;
 
-    // for (i = 0; i < 10; i++) {
-    //     getComputerChoice();
-    //     console.log(getComputerChoice());
-    //     playerChoice();
-    //     playRound(playerSelection, computerSelection)
-    //     console.log(playRound(playerSelection, computerSelection));
-    // }
+    for (let i = 0; i < 5; i++) {
+        round(playerChoice(), getComputerChoice());
+    }
+    if (computerScore === playerScore) {
+        console.log("THE WHOLE GAME WAS A DRAW")
+    } else if (playerScore > computerScore) {
+        console.log("EASY WIN TOO EASY")
+    } else {
+        console.log("YOU LOST IMAGINE HAHAHA")
+    }
+}
+
+game()

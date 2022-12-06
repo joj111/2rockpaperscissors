@@ -4,6 +4,9 @@ let computerScore = 0;
 //score
 
 const result = document.querySelector(".result");
+const pScore = document.querySelector(".pScore");
+const cScore = document.querySelector(".cScore");
+const re = document.querySelector(".game");
 
 let playerPick = "";
 
@@ -36,31 +39,37 @@ function round(player, computer) {
     } else if (player === "ROCK" && computer === "PAPER") {
         console.log("LOSS")
         computerScore++;
+        cScore.textContent = `Computer Score: ${computerScore}`;
         result.textContent = "It's a loss!";
         return("LOSS");
     } else if (player === "ROCK" && computer === "SCISSORS") {
         console.log("WIN")
         playerScore++;
+        pScore.textContent = `Player Score: ${playerScore}`;
         result.textContent = "It's a win!"
         return("WIN");
     } else if (player === "PAPER" && computer === "SCISSORS") {
         console.log("LOSS")
         computerScore++;
+        cScore.textContent = `Computer Score: ${computerScore}`;
         result.textContent = "It's a loss!"
         return("LOSS");
     } else if (player === "PAPER" && computer === "ROCK") {
         console.log("WIN")
         playerScore++;
+        pScore.textContent = `Player Score: ${playerScore}`;
         result.textContent = "It's a win!"
         return("WIN");
     } else if (player === "SCISSORS" && computer === "ROCK") {
         console.log("LOSS")
         computerScore++;
+        cScore.textContent = `Computer Score: ${computerScore}`;
         result.textContent = "It's a loss!"
         return("LOSS");
     } else if (player === "SCISSORS" && computer === "PAPER") {
         console.log("WIN")
         playerScore++;
+        pScore.textContent = `Player Score: ${playerScore}`;
         result.textContent = "It's a win!"
         return("WIN");
     }
@@ -89,20 +98,41 @@ const rock = document.querySelector(".rock");
 const paper = document.querySelector(".paper");
 const scissors = document.querySelector(".scissors");
 
+function endGame() {
+    if (computerScore >= 5) {
+        re.textContent = "YOU LOST IMAGINE HAHAHA";
+        console.log("YOU LOST IMAGINE HAHAHA");
+        computerScore = 0;
+        playerScore = 0;
+        cScore.textContent = `Computer Score: ${computerScore}`;
+        pScore.textContent = `Player Score: ${playerScore}`;
+    } else if (playerScore >= 5) {
+        re.textContent = "EASY WIN TOO EASY";
+        console.log("EASY WIN TOO EASY");
+        computerScore = 0;
+        playerScore = 0;
+        cScore.textContent = `Computer Score: ${computerScore}`;
+        pScore.textContent = `Player Score: ${playerScore}`;
+    };
+};
+
 rock.addEventListener("click", () => {
     playerPick = "ROCK";
     console.log("ROCK");
     round(playerPick, getComputerChoice());
+    endGame();
 });
 
 paper.addEventListener("click", () => {
     playerPick = "PAPER";
     console.log("PAPER");
     round(playerPick, getComputerChoice());
+    endGame();
 });
 
 scissors.addEventListener("click", () => {
     playerPick = "SCISSORS";
     console.log("SCISSORS");
     round(playerPick, getComputerChoice());
+    endGame();
 });
